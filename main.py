@@ -2,7 +2,7 @@ import discord
 import Globals
 from Salai import PassPromptToSelfBot, Upscale, MaxUpscale, Variation
 
-bot = discord.Bot(intents=discord.Intents.all())
+bot = discord.Bot(intents=discord.Intents.default())
 
 
 @bot.event
@@ -22,7 +22,7 @@ async def mj_imagine(ctx, prompt: discord.Option(str)):
         Globals.CHANNEL_ID = ctx.channel.id
 
     response = PassPromptToSelfBot(prompt)
-    
+
     if response.status_code >= 400:
         print(response.text)
         print(response.status_code)
@@ -89,7 +89,7 @@ async def mj_variation(ctx, index: discord.Option(int), reset_target : discord.O
 
     if (Globals.USE_MESSAGED_CHANNEL):
         Globals.CHANNEL_ID = ctx.channel.id
-        
+
     response = Variation(index, Globals.targetID, Globals.targetHash)
     if reset_target:
         Globals.targetID = ""
