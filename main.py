@@ -122,6 +122,8 @@ async def on_message(message):
             return
         await message.channel.send("Done")
         await message.delete()
+    if message.content.startswith('$hello'):
+        await message.channel.send(f'Hello {client.user}!')
 
 
 client.run(Globals.DAVINCI_TOKEN)
