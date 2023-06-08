@@ -15,6 +15,11 @@ async def on_ready():
 async def hello(ctx, sentence: discord.Option(str)):
     await ctx.respond(sentence)
 
+@bot.command(name='admit')
+async def admit(ctx, sentence: discord.Option(str)):
+    print(f"admit {bot.user}")
+    await ctx.respond(sentence)
+
 
 @bot.command(description="This command is a wrapper of MidJourneyAI")
 async def mj_imagine(ctx, prompt: discord.Option(str)):
