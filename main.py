@@ -3,9 +3,9 @@ import Globals
 from Salai import PassPromptToSelfBot, Upscale, MaxUpscale, Variation
 
 bot = discord.Bot(intents=discord.Intents.default())
+client = discord.Client()
 
-
-@bot.event
+@client.event
 async def on_ready():
     print(f"Logged in as {bot.user}")
 
@@ -101,7 +101,7 @@ async def mj_variation(ctx, index: discord.Option(int), reset_target : discord.O
 
 
 
-@bot.event
+@client.event
 async def on_message(message):
     if message.content == "": return
     if "$mj_target" in message.content and message.content[0] == '$':
@@ -124,4 +124,4 @@ async def on_message(message):
         await message.delete()
 
 
-bot.run(Globals.DAVINCI_TOKEN)
+client.run(Globals.DAVINCI_TOKEN)
