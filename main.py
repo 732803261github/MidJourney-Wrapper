@@ -13,7 +13,7 @@ async def on_ready():
     print(f"Logged in as {client.user}")
 
 
-@bot.command(description="Make DaVinci say something")
+@bot.command()
 async def hello(ctx, sentence: discord.Option(str)):
     print('input /hello to test')
     await ctx.respond(sentence)
