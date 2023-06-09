@@ -1,11 +1,9 @@
 import discord
-from discord.ext import commands
 import Globals
 from Salai import PassPromptToSelfBot, Upscale, MaxUpscale, Variation
 
 client = discord.Client()
-bot = commands.Bot(command_prefix='/')   # 指定命令前缀，例如 "!" 或 "/"
-# bot = discord.Bot(intents=discord.Intents.default())
+bot = discord.Bot(intents=discord.Intents.all(), proxy='http://127.0.0.1:9050')
 
 
 @client.event
@@ -13,9 +11,8 @@ async def on_ready():
     print(f"Logged in as {client.user}")
 
 
-@bot.command()
+@bot.command(description="Make DaVinci say something")
 async def hello(ctx, sentence: discord.Option(str)):
-    print('input /hello to test')
     await ctx.respond(sentence)
 
 
