@@ -3,7 +3,7 @@ import Globals
 from Salai import PassPromptToSelfBot, Upscale, MaxUpscale, Variation
 
 client = discord.Client()
-bot = discord.Bot(intents=discord.Intents.all(), proxy='http://127.0.0.1:9050')
+bot = discord.Bot(intents=discord.Intents.all())
 
 
 @client.event
@@ -13,7 +13,7 @@ async def on_ready():
 
 @bot.command(description="Make DaVinci say something")
 async def hello(ctx, sentence: discord.Option(str)):
-    await ctx.respond(sentence)
+    await ctx.reply(sentence)
 
 
 @bot.command(description="This command is a wrapper of MidJourneyAI")
