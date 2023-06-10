@@ -2,12 +2,13 @@ import discord
 import Globals
 from Salai import PassPromptToSelfBot, Upscale, MaxUpscale, Variation
 
-bot = discord.Bot(intents=discord.Intents.all())
+bot = discord.Bot(command_prefix='/', intents=discord.Intents.default())
 
 
 @bot.event
 async def on_ready():
     print(f"Logged in as {bot.user}")
+
 
 @bot.command(description="Make DaVinci sayhi")
 async def sayhi(ctx, sentence: discord.Option(str)):
