@@ -2,18 +2,21 @@ import discord
 import Globals
 from Salai import PassPromptToSelfBot, Upscale, MaxUpscale, Variation
 
-client = discord.Client()
 bot = discord.Bot(intents=discord.Intents.all())
 
 
-@client.event
+@bot.event
 async def on_ready():
-    print(f"Logged in as {client.user}")
+    print(f"Logged in as {bot.user}")
+
+@bot.command(description="Make DaVinci sayhi")
+async def sayhi(ctx, sentence: discord.Option(str)):
+    await ctx.send('nice to meet you')
 
 
 @bot.command(description="Make DaVinci say something")
 async def hello(ctx, sentence: discord.Option(str)):
-    await ctx.reply(sentence)
+    await ctx.respond(sentence)
 
 
 @bot.command(description="This command is a wrapper of MidJourneyAI")
@@ -101,7 +104,7 @@ async def mj_variation(ctx, index: discord.Option(int), reset_target: discord.Op
     await ctx.respond("Your image is being prepared, please wait a moment...")
 
 
-@client.event
+@bot.event
 async def on_message(message):
     if message.content == "": return
     if "$mj_target" in message.content and message.content[0] == '$':
@@ -123,7 +126,7 @@ async def on_message(message):
         await message.channel.send("Done")
         await message.delete()
     if message.content.startswith('$hello'):
-        await message.channel.send(f'Hello {client.user}!')
+        await message.channel.send(f'Hello {bot.user}!')
 
 
-client.run(Globals.DAVINCI_TOKEN)
+bot.run(Globals.DAVINCI_TOKEN)
