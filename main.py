@@ -11,7 +11,7 @@ async def on_ready():
 
 
 @bot.command(description="Make DaVinci sayhi")
-async def sayhi(ctx, sentence: discord.Option(str)):
+async def sayhi(ctx):
     await ctx.send('nice to meet you')
 
 
