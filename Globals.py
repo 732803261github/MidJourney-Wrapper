@@ -1,4 +1,4 @@
-#strings
+# strings
 
 DAVINCI_TOKEN = 'MTExNjI4ODAxNzk3MjMzNDY0Mw.GzuaND.qCj0rZKPGKQjOBZHyqTfKO4-tDJp5RjO4NcaZs'
 
@@ -8,10 +8,12 @@ SALAI_TOKEN = 'MTEwNzkxNzMzOTMzODQ5Mzk4Mw.GSq9vS.oM2b3WLY5uBZqQJu2CrDRozGRNjX858
 
 CHANNEL_ID = '1115553083792039979'
 
-#boolean
+OPEN_AI_KEY = 'key'
+
+# boolean
 USE_MESSAGED_CHANNEL = False
 
-#don't edit the following variable
-MID_JOURNEY_ID = "936929561302675456"  #midjourney bot id
-targetID       = ""
-targetHash     = ""
+# don't edit the following variable
+MID_JOURNEY_ID = "936929561302675456"  # midjourney bot id
+targetID = ""
+targetHash = ""
