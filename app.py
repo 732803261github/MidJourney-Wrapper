@@ -41,7 +41,7 @@ def image():
         )
         return completion['data'][0]['url']
 
-    return render_template('image.html') @ app.route('/image', methods=['GET', 'POST'])
+    return render_template('image.html')
 
 
 @app.route('/midjourney', methods=['GET', 'POST'])
