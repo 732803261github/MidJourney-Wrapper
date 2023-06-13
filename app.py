@@ -51,12 +51,12 @@ def midjourney():
 
         @bot.event
         async def on_ready():
-            channel = bot.get_channel(1116666992993259573)
+            channel = bot.get_channel(1116679302889619466)
             await channel.send(prompt)
 
         @bot.event
         async def on_message(message):
-            if message.channel.id == 1116666992993259573:
+            if message.channel.id == '1116679302889619466':
                 response = message.content
                 return response
 
