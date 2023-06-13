@@ -140,6 +140,8 @@ app = Flask(__name__)
 # 获取 openai 的 API 密钥
 dict = [Globals.OPEN_AI_KEY]
 openai.api_key = random.choices(dict, k=1)[0]
+
+
 @app.route('/', methods=['GET', 'POST'])
 def chat():
     if request.method == 'POST':
@@ -169,14 +171,19 @@ def image():
 
     return render_template('image.html')
 
+
 # 包装 bot.run() 在异步函数中
 async def async_start():
     await bot.run(Globals.DAVINCI_TOKEN)
 
-# 启动 Discord bot
-loop = asyncio.get_event_loop()
-task = loop.create_task(async_start())
-
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=8088)
+    # 启动 Discord bot
+    loop = asyncio.get_event_loop()
+    task = loop.create_task(async_start())
+    try:
+        app.run(host='0.0.0.0', port=8088)  # 启动 Flask App
+    finally:
+        task.cancel()  # 在 Flask App 关闭后，取消异步任务并关闭 Discord bot
+        loop.run_until_complete(task)
+        loop.close()
