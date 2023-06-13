@@ -4,7 +4,7 @@ from Salai import PassPromptToSelfBot, Upscale, MaxUpscale, Variation
 from flask import Flask, request, jsonify, render_template
 import openai
 import random
-import asyncio
+import threading
 
 
 # 创建 Flask 实例
@@ -141,10 +141,6 @@ async def on_message(message):
     if message.content.startswith('$hello'):
         await message.channel.send(f'Hello {bot.user}!')
 
-# 包装 bot.run() 在异步函数中
-async def async_start():
-    await bot.start(Globals.DAVINCI_TOKEN)
-
 
 @app.route('/', methods=['GET', 'POST'])
 def chat():
@@ -178,11 +174,6 @@ def image():
 
 if __name__ == '__main__':
     # 启动 Discord bot
-    loop = asyncio.get_event_loop()
-    task = loop.create_task(async_start())
-    try:
-        app.run(host='0.0.0.0', port=8088)  # 启动 Flask App
-    finally:
-        task.cancel()  # 在 Flask App 关闭后，取消异步任务并关闭 Discord bot
-        loop.run_until_complete(task)
-        loop.close()
+    threading.Thread(target=bot.run(Globals.DAVINCI_TOKEN)).start()
+    app.run(host='0.0.0.0', port=8088)  # 启动 Flask App
+
