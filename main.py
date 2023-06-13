@@ -174,7 +174,7 @@ def image():
 
 # 包装 bot.run() 在异步函数中
 async def async_start():
-    await bot.run(Globals.DAVINCI_TOKEN)
+    await bot.start(Globals.DAVINCI_TOKEN)
 
 
 if __name__ == '__main__':
