@@ -5,6 +5,7 @@ from Salai import PassPromptToSelfBot, Upscale, MaxUpscale, Variation
 from flask import Flask, request, jsonify, render_template
 import openai
 import random
+import asyncio
 
 bot = discord.Bot(command_prefix='/', intents=discord.Intents.default())
 
@@ -168,7 +169,14 @@ def image():
 
     return render_template('image.html')
 
+# 包装 bot.run() 在异步函数中
+async def async_start():
+    await bot.run(Globals.DAVINCI_TOKEN)
+
+# 启动 Discord bot
+loop = asyncio.get_event_loop()
+task = loop.create_task(async_start())
+
 
 if __name__ == '__main__':
-    app.run(debug=True, port=8088)
-    bot.run(Globals.DAVINCI_TOKEN)
+    app.run(host='0.0.0.0', port=8088)
