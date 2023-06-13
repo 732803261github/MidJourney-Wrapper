@@ -1,11 +1,18 @@
 import discord
 import Globals
 from Salai import PassPromptToSelfBot, Upscale, MaxUpscale, Variation
-
 from flask import Flask, request, jsonify, render_template
 import openai
 import random
 import asyncio
+
+
+# 创建 Flask 实例
+app = Flask(__name__)
+# 获取 openai 的 API 密钥
+dict = [Globals.OPEN_AI_KEY]
+openai.api_key = random.choices(dict, k=1)[0]
+
 
 bot = discord.Bot(command_prefix='/', intents=discord.Intents.default())
 
@@ -134,12 +141,9 @@ async def on_message(message):
     if message.content.startswith('$hello'):
         await message.channel.send(f'Hello {bot.user}!')
 
-
-# 创建 Flask 实例
-app = Flask(__name__)
-# 获取 openai 的 API 密钥
-dict = [Globals.OPEN_AI_KEY]
-openai.api_key = random.choices(dict, k=1)[0]
+# 包装 bot.run() 在异步函数中
+async def async_start():
+    await bot.start(Globals.DAVINCI_TOKEN)
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -170,11 +174,6 @@ def image():
         return completion['data'][0]['url']
 
     return render_template('image.html')
-
-
-# 包装 bot.run() 在异步函数中
-async def async_start():
-    await bot.start(Globals.DAVINCI_TOKEN)
 
 
 if __name__ == '__main__':
