@@ -127,6 +127,30 @@
                 transform: rotate(360deg);
             }
         }
+
+        button {
+            font-family: -apple-system, "Helvetica Neue", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: none;
+            background-color: #007aff;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            text-transform: capitalize;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #006fe6;
+        }
+
+        button:active {
+            background-color: #0058be;
+        }
     </style>
 </head>
 <body>
@@ -140,8 +164,8 @@
 <form>
     <input name="prompt" type="text" placeholder="请输入描述" id="prompt"/>
     <button type="submit">发送</button>
-    <button id="collect" onclick="collect()">获取生成结果</button>
 </form>
+<button id="collect" onclick="collect()">5分钟后获取图片结果</button>
 <p><span></span></p>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
