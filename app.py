@@ -124,7 +124,6 @@ def collecting_results():
     message_list = retrieve_messages()
     for message in message_list:
         if (message['author']['username'] == 'Midjourney Bot') and ('**' in message['content']):
-            print(message)
             if len(message['attachments']) > 0:
                 # 已完成列表
                 if (message['attachments'][0]['filename'][-4:] == '.png') or (
