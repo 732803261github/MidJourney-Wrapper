@@ -139,8 +139,7 @@
 </div>
 <form>
     <input name="prompt" type="text" placeholder="请输入描述" id="prompt"/>
-    <button type="submit">发送</button>
-    <button type="submit" id="collect" onclick="collect()">发送</button>
+    <button type="submit">点击查看图片</button>
 </form>
 <p><span></span></p>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -152,7 +151,7 @@
         $("#img").addClass("animate-spin")
         event.preventDefault();
         $.ajax({
-            url: '/midjourney',
+            url: '/collect',
             type: 'POST',
             data: $(this).serialize(),
             success: function (response) {
@@ -166,15 +165,15 @@
         });
     });
 
-    function collect() {
-        $.ajax({
-            url: '/collect',
-            type: 'POST',
-            data: $(this).serialize(),
-            success: function (response) {
-                imgElement.src = response;
-            }
-        });
+    // 定义一个打字机效果的函数
+    function typeWriter(text, i, element) {
+        if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
+            setTimeout(function () {
+                typeWriter(text, i, element);
+            }, 50);
+        }
     }
 
 </script>

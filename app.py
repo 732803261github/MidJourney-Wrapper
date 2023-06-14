@@ -166,7 +166,7 @@ def collecting_results():
                 if '(Waiting to start)' in message['content']:
                     status = 'Waiting to start'
                 return status
-    return render_template('midjourney.html')
+    return render_template('collect.html')
 
 
 if __name__ == '__main__':
