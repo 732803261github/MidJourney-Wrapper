@@ -54,16 +54,22 @@ def midjourney():
         }
         payload = {
             "type": 2,
-            "application_id": "1116670202210435092",
+            "application_id": "936929561302675456",
             "guild_id": "1116666992238276620",
             "channel_id": "1116666992993259573",
             "session_id": "8fd1e6029a5d0604113dae462e6b9f57",
             "data": {
-                "version": "1116938194840191064",
-                "id": "1116938194840191058",
+                "version": "1077969938624553050",
+                "id": "938956540159881230",
                 "name": "imagine",
                 "type": 1,
-                'options': [{'type': 3, 'name': 'prompt', 'value': str(prompt) + ' ' + '"--v 5"'}],
+                "options": [
+                    {
+                        "type": 3,
+                        "name": "prompt",
+                        "value": "pig"
+                    }
+                ],
                 "attachments": []
             },
         }
