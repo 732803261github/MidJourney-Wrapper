@@ -67,7 +67,7 @@ def midjourney():
                     {
                         "type": 3,
                         "name": "prompt",
-                        "value": str(prompt)
+                        "value": str(prompt) + ' ' + 0
                     }
                 ],
                 "attachments": []
