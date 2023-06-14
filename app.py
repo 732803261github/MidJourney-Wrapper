@@ -59,17 +59,11 @@ def midjourney():
             "channel_id": "1116666992993259573",
             "session_id": "8fd1e6029a5d0604113dae462e6b9f57",
             "data": {
-                "version": "1116938194840191063",
-                "id": "1116938194840191057",
+                "version": "1116938194840191064",
+                "id": "1116938194840191058",
                 "name": "imagine",
                 "type": 1,
-                "options": [
-                    {
-                        "type": 3,
-                        "name": "prompt",
-                        "value": str(prompt) + ' ' + 0
-                    }
-                ],
+                'options': [{'type': 3, 'name': 'prompt', 'value': str(prompt) + ' ' + '"--v 5"'}],
                 "attachments": []
             },
         }
