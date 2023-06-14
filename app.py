@@ -49,6 +49,9 @@ def midjourney():
     if request.method == 'POST':
         prompt = request.form['prompt']
 
+        headers = {
+            'authorization': Globals.SALAI_TOKEN
+        }
         payload = {
             "type": 2,
             "application_id": "1116670202210435092",
@@ -64,7 +67,7 @@ def midjourney():
                     {
                         "type": 3,
                         "name": "sentence",
-                        "value": "1"
+                        "value": int(prompt)
                     }
                 ],
                 "attachments": []
