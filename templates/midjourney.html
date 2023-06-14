@@ -164,7 +164,6 @@
 </head>
 <body>
 <h1>MidJourney</h1>
-<img src="" id="generateImg" style="max-width: 98%;max-height: 98%"></div>
 <div class="code" id="output"></div>
 <div id="loading">
     <img class="h-[40px] w-[40px]" id="img"
@@ -201,7 +200,6 @@
     });
 
     function collect() {
-        var imgElement = document.getElementById("generateImg");
         var txtElement = document.getElementById("output");
         $.ajax({
             url: '/collect',
@@ -209,7 +207,7 @@
             data: $(this).serialize(),
             success: function (response) {
                 if (response.txt == undefined) {
-                    imgElement.src = response.img;
+                    window.location.href = response.img;
                 } else {
                     txtElement.innerHTML += response.txt;
                 }
