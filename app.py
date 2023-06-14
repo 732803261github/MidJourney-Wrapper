@@ -111,15 +111,15 @@ def midjourney():
     return render_template('midjourney.html')
 
 
-@app.route('/result', methods=['GET', 'POST'])
+@app.route('/midjson', methods=['GET', 'POST'])
 def retrieve_messages():
     headers = {'authorization': Globals.SALAI_TOKEN}
     r = requests.get(f'https://discord.com/api/v10/channels/1116666992993259573/messages?limit={10}', headers=headers)
     jsonn = json.loads(r.text)
-    print(jsonn)
     return jsonn
 
 
+@app.route('/collect', methods=['GET', 'POST'])
 def collecting_results():
     message_list = retrieve_messages()
     for message in message_list:
@@ -142,6 +142,9 @@ def collecting_results():
                         pass
                     url = message['attachments'][0]['url']
                     filename = message['attachments'][0]['filename']
+                    print(url)
+                    print(filename)
+                    return url
                 # 进行中列表
                 else:
                     id = message['id']
@@ -153,6 +156,7 @@ def collecting_results():
                             status = re.findall("(\w*%)", message['content'])[0]
                         except:
                             status = 'unknown status'
+                    return status
 
             else:
                 id = message['id']
@@ -161,6 +165,8 @@ def collecting_results():
                 status = 'unknown status'
                 if '(Waiting to start)' in message['content']:
                     status = 'Waiting to start'
+                return status
+    return render_template('midjourney.html')
 
 
 if __name__ == '__main__':
