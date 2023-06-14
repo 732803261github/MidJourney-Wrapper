@@ -144,7 +144,7 @@ def collecting_results():
                     filename = message['attachments'][0]['filename']
                     print(url)
                     print(filename)
-                    return url
+                    return json.loads(url)
                 # 进行中列表
                 else:
                     id = message['id']
