@@ -24,7 +24,6 @@ def chat():
                 {"role": "user", "content": prompt}
             ]
         )
-        print(completion.choices[0].message)
         return jsonify(completion.choices[0].message)
 
     return render_template('index.html')
