@@ -67,7 +67,7 @@ def midjourney():
                     {
                         "type": 3,
                         "name": "sentence",
-                        "value": int(prompt)
+                        "value": prompt
                     }
                 ],
                 "attachments": []
