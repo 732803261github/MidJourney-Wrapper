@@ -2,8 +2,8 @@ import Globals
 from flask import Flask, request, jsonify, render_template
 import openai
 import random
-import discord
 from discord.ext import commands
+import requests
 
 # 创建 Flask 实例
 app = Flask(__name__)
@@ -48,17 +48,14 @@ def image():
 def midjourney():
     if request.method == 'POST':
         prompt = request.form['prompt']
-
-        @bot.event
-        async def on_ready():
-            channel = bot.get_channel(1116679302889619466)
-            await channel.send(prompt)
-
-        @bot.event
-        async def on_message(message):
-            if message.channel.id == '1116679302889619466':
-                response = message.content
-                return response
+        # Discord Webhook URL
+        url = 'https://discord.com/api/webhooks/1118400244565160087/LAcZ19qK8Q9RfubXVjUziT2b6GpKaSzBvtuc5JKqswegbq5RXSJCQBCJIv2us1RFLVev'
+        # 发送消息内容
+        payload = {'content': 'Hello, World!'}
+        # 发送 POST 请求
+        response = requests.post(url, json=payload)
+        # 打印响应状态码和响应内容
+        return response.content
 
     return render_template('midjourney.html')
 
