@@ -4,6 +4,8 @@ import openai
 import random
 from discord.ext import commands
 import requests
+import json
+import re
 
 # 创建 Flask 实例
 app = Flask(__name__)
@@ -107,6 +109,58 @@ def midjourney():
         return response.content
 
     return render_template('midjourney.html')
+
+
+@app.route('/result', methods=['GET', 'POST'])
+def retrieve_messages():
+    headers = {'authorization': Globals.SALAI_TOKEN}
+    r = requests.get(f'https://discord.com/api/v10/channels/1116666992993259573/messages?limit={10}', headers=headers)
+    jsonn = json.loads(r.text)
+    print(jsonn)
+    return jsonn
+
+
+def collecting_results():
+    message_list = retrieve_messages()
+    for message in message_list:
+        if (message['author']['username'] == 'Midjourney Bot') and ('**' in message['content']):
+            print(message)
+            if len(message['attachments']) > 0:
+                # 已完成列表
+                if (message['attachments'][0]['filename'][-4:] == '.png') or (
+                        '(Open on website for full quality)' in message['content']):
+                    id = message['id']
+                    task_id = re.findall("<@\d+>", message['content'])[0].replace("<@", "").replace(">", "")
+                    prompt = message['content'].split('**')[1].split('--')[0].strip()
+                    # 如果 prompt 中含有链接，则需要把链接删除掉
+                    pic_url_list = re.findall(
+                        r'<http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+>', prompt)
+                    if len(pic_url_list) > 0:
+                        for pic_url in pic_url_list:
+                            prompt = prompt.replace(pic_url, "").strip()
+                    else:
+                        pass
+                    url = message['attachments'][0]['url']
+                    filename = message['attachments'][0]['filename']
+                # 进行中列表
+                else:
+                    id = message['id']
+                    task_id = re.findall("<@\d+>", message['content'])[0].replace("<@", "").replace(">", "")
+                    prompt = message['content'].split('**')[1].split('--')[0].strip()
+                    status = 'unknown status'
+                    if ('(fast)' in message['content']) or ('(relaxed)' in message['content']):
+                        try:
+                            status = re.findall("(\w*%)", message['content'])[0]
+                        except:
+                            status = 'unknown status'
+
+            else:
+                id = message['id']
+                task_id = re.findall("<@\d+>", message['content'])[0].replace("<@", "").replace(">", "")
+                prompt = message['content'].split('**')[1].split('--')[0].strip()
+                status = 'unknown status'
+                if '(Waiting to start)' in message['content']:
+                    status = 'Waiting to start'
 
 
 if __name__ == '__main__':
