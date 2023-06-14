@@ -61,13 +61,13 @@ def midjourney():
             "data": {
                 "version": "1116938194840191063",
                 "id": "1116938194840191057",
-                "name": "hello",
+                "name": "imagine",
                 "type": 1,
                 "options": [
                     {
                         "type": 3,
-                        "name": "sentence",
-                        "value": prompt
+                        "name": "prompt",
+                        "value": str(prompt)
                     }
                 ],
                 "attachments": []
