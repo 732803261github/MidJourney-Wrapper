@@ -48,6 +48,13 @@ def image():
 def midjourney():
     if request.method == 'POST':
         prompt = request.form['prompt']
+        completion = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=[
+                {"role": "user", "content": prompt}
+            ]
+        )
+        prompt = completion.choices[0].message.content
         headers = {
             'authorization': Globals.SALAI_TOKEN
         }
