@@ -144,7 +144,8 @@ def collecting_results():
                     filename = message['attachments'][0]['filename']
                     print(url)
                     print(filename)
-                    return json.loads(url)
+                    json = {'img': url}
+                    return json
                 # 进行中列表
                 else:
                     id = message['id']
