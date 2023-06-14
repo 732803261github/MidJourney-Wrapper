@@ -50,7 +50,7 @@ def midjourney():
         completion = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=[
-                {"role": "user", "content": prompt}
+                {"role": "user", "content": '翻译，只需输出英文即可 %s' % prompt}
             ]
         )
         prompt = completion.choices[0].message.content
