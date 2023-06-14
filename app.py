@@ -78,7 +78,7 @@ def midjourney():
         # 发送消息内容
         # payload = {'content': prompt}
         # 发送 POST 请求
-        response = requests.post('https://discord.com/api/v9/interactions', json=payload)
+        response = requests.post('https://discord.com/api/v9/interactions', json=payload, headers=headers)
         # 打印响应状态码和响应内容
         return response.content
 
