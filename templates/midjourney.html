@@ -151,6 +151,7 @@
         button:active {
             background-color: #0058be;
         }
+
         #collect {
             position: relative;
             float: right;
@@ -200,12 +201,17 @@
 
     function collect() {
         var imgElement = document.getElementById("generateImg");
+        var txtElement = document.getElementById("output");
         $.ajax({
             url: '/collect',
             type: 'POST',
             data: $(this).serialize(),
             success: function (response) {
-                imgElement.src = response;
+                if (response.txt == undefined) {
+                    imgElement.src = response.img;
+                } else {
+                    txtElement.innerHTML += response.txt;
+                }
             }
         });
     }

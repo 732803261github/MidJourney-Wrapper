@@ -157,7 +157,7 @@ def collecting_results():
                             status = re.findall("(\w*%)", message['content'])[0]
                         except:
                             status = 'unknown status'
-                    return status
+                    return {'txt': status}
 
             else:
                 id = message['id']
@@ -166,7 +166,7 @@ def collecting_results():
                 status = 'unknown status'
                 if '(Waiting to start)' in message['content']:
                     status = 'Waiting to start'
-                return status
+                return {'txt': status}
 
 
 if __name__ == '__main__':
