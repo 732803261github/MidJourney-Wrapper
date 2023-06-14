@@ -51,7 +51,7 @@ def midjourney():
         # Discord Webhook URL
         url = 'https://discord.com/api/webhooks/1118400244565160087/LAcZ19qK8Q9RfubXVjUziT2b6GpKaSzBvtuc5JKqswegbq5RXSJCQBCJIv2us1RFLVev'
         # 发送消息内容
-        payload = {'content': 'Hello, World!'}
+        payload = {'content': prompt}
         # 发送 POST 请求
         response = requests.post(url, json=payload)
         # 打印响应状态码和响应内容
