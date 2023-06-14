@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Chat AI</title>
+  <title>MidJourney</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
@@ -145,6 +145,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
   $('form').submit(function (event) {
+    debugger
     var input = document.getElementById("prompt");
     input.readOnly = true;
     $("#img").show()
@@ -160,6 +161,7 @@
         $("#img").removeClass("animate-spin")
         $("#img").hide()
         $("#output").empty();
+        debugger
         typeWriter(response.content, 0, document.getElementById('output'));
         $("#prompt").val("");
       }
