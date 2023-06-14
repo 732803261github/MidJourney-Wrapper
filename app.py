@@ -48,13 +48,34 @@ def image():
 def midjourney():
     if request.method == 'POST':
         prompt = request.form['prompt']
-        # Discord Webhook URL
+
+        payload = {
+            "type": 2,
+            "application_id": "1116670202210435092",
+            "guild_id": "1116666992238276620",
+            "channel_id": "1116666992993259573",
+            "session_id": "8fd1e6029a5d0604113dae462e6b9f57",
+            "data": {
+                "version": "1116938194840191063",
+                "id": "1116938194840191057",
+                "name": "hello",
+                "type": 1,
+                "options": [
+                    {
+                        "type": 3,
+                        "name": "sentence",
+                        "value": "1"
+                    }
+                ],
+                "attachments": []
+            },
+        }
         # url = 'https://discord.com/api/webhooks/1118400244565160087/LAcZ19qK8Q9RfubXVjUziT2b6GpKaSzBvtuc5JKqswegbq5RXSJCQBCJIv2us1RFLVev'
         url = 'https://discord.com/api/webhooks/1118398227985743872/TgDfOPmetJ3bk_eOD-1uy1rSh3nLLlJcbNL_vVAJeN6pLg6c_HkP_8NMN3UeY7AKwcvQ'
         # 发送消息内容
-        payload = {'content': prompt}
+        # payload = {'content': prompt}
         # 发送 POST 请求
-        response = requests.post(url, json=payload)
+        response = requests.post('https://discord.com/api/v9/interactions', json=payload)
         # 打印响应状态码和响应内容
         return response.content
 
