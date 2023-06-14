@@ -123,10 +123,12 @@ def retrieve_messages():
 def collecting_results():
     message_list = retrieve_messages()
     for message in message_list:
-        if (message['author']['username'] == 'Midjourney Bot') and ('**' in message['content']):
+        if (message['author']['username'] == 'Midjourney Bot') and ('**' in message['content']) and (
+                'image/png' in message['attachments'][0]['content_type']):
             if len(message['attachments']) > 0:
                 # 已完成列表
-                if (message['attachments'][0]['filename'][-4:] == '.png'):
+                if (message['attachments'][0]['filename'][-4:] == '.png') or (
+                        '(Open on website for full quality)' in message['content']):
                     id = message['id']
                     task_id = re.findall("<@\d+>", message['content'])[0].replace("<@", "").replace(">", "")
                     prompt = message['content'].split('**')[1].split('--')[0].strip()
