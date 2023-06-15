@@ -1,220 +1,253 @@
 <!DOCTYPE html>
 <html>
-<head>
-    <title>MidJourney</title>
+<head><title>MidJourney</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        /* 全局样式 */
-        body {
-            background-color: #EEEFFF;
-            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            color: #333333;
-        }
+    <style> /* 全局样式 */
+    body {
+        background-color: #EEEFFF;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        color: #333333;
+    }
 
-        /* 顶部标题样式 */
+    /* 顶部标题样式 */
+    h1 {
+        color: #333;
+        text-align: center;
+        font-size: 3.2rem;
+        margin-top: 4.8rem;
+        margin-bottom: 2.4rem;
+        letter-spacing: 1px;
+        font-weight: lighter;
+        text-rendering: optimizeLegibility;
+    }
+
+    /* 代码展示区样式 */
+    .code {
+        max-width: 800px;
+        margin: 0 auto;
+        background-color: #FFFFFF;
+        border-radius: 10px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2.4rem;
+        font-size: 1.8rem;
+        line-height: 2.8rem;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        overflow: auto;
+    }
+
+    /* 输入框样式 */
+    form {
+        max-width: 800px;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+    input[type="text"] {
+        font-size: 1.8rem;
+        padding: 1.5rem 2rem;
+        border-radius: 10px;
+        background-color: #F9F9FA;
+        border: none;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08), 0 2px 2px rgba(0, 0, 0, 0.08);
+        color: #444444;
+        flex-grow: 1;
+        outline: none !important;
+    }
+
+    /* 按钮样式 */
+    button[type="submit"] {
+        font-size: 1.8rem;
+        padding: 1.5rem 2rem;
+        border-radius: 10px;
+        background-color: #007AFF;
+        border: none;
+        color: #FFFFFF;
+        cursor: pointer;
+        transition: all .2s ease-in-out;
+        outline: none !important;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1);
+    }
+
+    button[type="submit"]:hover {
+        background-color: #0065D2;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15), 0 2px 2px rgba(0, 0, 0, 0.15);
+    }
+
+    /* 输入框中的字母样式 */
+    ::placeholder {
+        color: #999999;
+        font-weight: normal;
+        font-style: italic;
+    }
+
+    /* 底部提示样式 */
+    p {
+        margin-top: 1.5rem;
+        text-align: center;
+        font-size: 1.6rem;
+        color: #999999;
+    }
+
+    p span {
+        display: inline-block;
+        font-size: 1.8rem;
+        font-weight: bold;
+        color: #007AFF;
+        letter-spacing: 2px;
+    }
+
+    #loading {
+        display: flex;
+        justify-content: center;
+        align-items: center; /* 让子元素居中 */
+    }
+
+    .animate-spin {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        animation: spin 1s infinite linear;
+    }
+
+    @keyframes spin {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    button {
+        font-family: -apple-system, "Helvetica Neue", sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        padding: 8px 16px;
+        border-radius: 8px;
+        border: none;
+        background-color: #007aff;
+        color: #fff;
+        text-align: center;
+        text-decoration: none;
+        text-transform: capitalize;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+    }
+
+    button:hover {
+        background-color: #006fe6;
+    }
+
+    button:active {
+        background-color: #0058be;
+    }
+
+    /* 移动端优化 */
+    @media screen and (max-width: 768px) {
         h1 {
-            color: #333;
-            text-align: center;
-            font-size: 3.2rem;
-            margin-top: 4.8rem;
-            margin-bottom: 2.4rem;
-            letter-spacing: 1px;
-            font-weight: lighter;
-            text-rendering: optimizeLegibility;
+            font-size: 2.4rem;
+            margin-top: 2.4rem;
+            margin-bottom: 1.2rem;
         }
 
-        /* 代码展示区样式 */
         .code {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: #FFFFFF;
-            border-radius: 10px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.1);
-            margin-bottom: 2.4rem;
-            font-size: 1.8rem;
-            line-height: 2.8rem;
-            white-space: pre-wrap;
-            word-wrap: break-word;
-            overflow: auto;
-        }
-
-        /* 输入框样式 */
-        form {
-            max-width: 800px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative;
+            font-size: 1.4rem;
+            line-height: 2.2rem;
         }
 
         input[type="text"] {
-            font-size: 1.8rem;
-            padding: 1.5rem 2rem;
-            border-radius: 10px;
-            background-color: #F9F9FA;
-            border: none;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08), 0 2px 2px rgba(0, 0, 0, 0.08);
-            color: #444444;
-            flex-grow: 1;
-            outline: none !important;
+            font-size: 1.4rem;
+            padding: 1rem 1.5rem;
         }
 
-        /* 按钮样式 */
         button[type="submit"] {
-            font-size: 1.8rem;
-            padding: 1.5rem 2rem;
-            border-radius: 10px;
-            background-color: #007AFF;
-            border: none;
-            color: #FFFFFF;
-            cursor: pointer;
-            transition: all .2s ease-in-out;
-            outline: none !important;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1);
+            font-size: 1.4rem;
+            padding: 1rem 1.5rem;
         }
 
-        button[type="submit"]:hover {
-            background-color: #0065D2;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15), 0 2px 2px rgba(0, 0, 0, 0.15);
-        }
-
-        /* 输入框中的字母样式 */
-        ::placeholder {
-            color: #999999;
-            font-weight: normal;
-            font-style: italic;
-        }
-
-        /* 底部提示样式 */
         p {
-            margin-top: 1.5rem;
-            text-align: center;
-            font-size: 1.6rem;
-            color: #999999;
+            font-size: 1.4rem;
         }
 
         p span {
-            display: inline-block;
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #007AFF;
-            letter-spacing: 2px;
+            font-size: 1.6rem;
         }
-
-        #loading {
-            display: flex;
-            justify-content: center;
-            align-items: center; /* 让子元素居中 */
-        }
-
-        .animate-spin {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            animation: spin 1s infinite linear;
-        }
-
-        @keyframes spin {
-            from {
-                transform: rotate(0deg);
-            }
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        button {
-            font-family: -apple-system, "Helvetica Neue", sans-serif;
-            font-size: 14px;
-            font-weight: 400;
-            padding: 8px 16px;
-            border-radius: 8px;
-            border: none;
-            background-color: #007aff;
-            color: #fff;
-            text-align: center;
-            text-decoration: none;
-            text-transform: capitalize;
-            cursor: pointer;
-            transition: all 0.2s ease-in-out;
-        }
-
-        button:hover {
-            background-color: #006fe6;
-        }
-
-        button:active {
-            background-color: #0058be;
-        }
-
-        #collect {
-            position: relative;
-            float: right;
-            height: 86px;
-            font-size: 26px;
-            left: -60px;
-            top: -88px;
-        }
-    </style>
-</head>
-<body>
-<h1>MidJourney</h1>
-<div class="code" id="output"></div>
-<div id="loading">
-    <img class="h-[40px] w-[40px]" id="img"
-         src="../static/loading.png"
-         hidden="true">
-</div>
-<form>
-    <input name="prompt" type="text" placeholder="请输入图片描述" id="prompt"/>
-    <button type="submit">发送</button>
-</form>
-<button id="collect" onclick="collect()">5分钟后获取图片结果</button>
-<p><span></span></p>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script>
-    $('form').submit(function (event) {
-        var input = document.getElementById("prompt");
-        input.readOnly = true;
-        $("#img").show()
-        $("#img").addClass("animate-spin")
-        event.preventDefault();
-        $.ajax({
-            url: '/midjourney',
-            type: 'POST',
-            data: $(this).serialize(),
-            success: function (response) {
-                var input = document.getElementById("prompt");
-                input.readOnly = false;
-                $("#img").removeClass("animate-spin")
-                $("#img").hide()
-                imgElement.src = response;
-                $("#prompt").val("");
-            }
-        });
-    });
-
-    function collect() {
-        var txtElement = document.getElementById("output");
-        $.ajax({
-            url: '/collect',
-            type: 'POST',
-            data: $(this).serialize(),
-            success: function (response) {
-                if (response.txt == undefined) {
-                    window.location.href = response.img;
-                } else {
-                    txtElement.innerHTML += response.txt;
-                }
-            }
-        });
     }
 
+    #collect_div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 20vh;
+        font-size: 40px;
+        /* width: 100%; */
+        text-align: center;
+    }
+
+    #collect {
+        height: 15vh;
+        font-size: 6vh;
+    }
+    </style>
+</head>
+<body><h1>MidJourney</h1>
+<div class="code" id="code"><img src="" id="generateImg" style="max-width: 98%;max-height: 98%"></div>
+<div>
+    <div class="code" id="output"></div>
+    <div id="loading"><img class="h-[40px] w-[40px]" id="img" src="../static/loading.png" hidden="true"></div>
+    <form><input name="prompt" type="text" placeholder="请输入图片描述" id="prompt"/>
+        <button type="submit">发送</button>
+    </form>
+    <p><span></span></p>
+</div>
+<div id="collect_div">
+    <button id="collect" onclick="collect()">5分钟后获取图片结果</button>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script> $('form').submit(function (event) {
+    var input = document.getElementById("prompt");
+    input.readOnly = true;
+    $("#img").show()
+    $("#img").addClass("animate-spin")
+    event.preventDefault();
+    $.ajax({
+        url: '/midjourney', type: 'POST', data: $(this).serialize(), success: function (response) {
+            var input = document.getElementById("prompt");
+            input.readOnly = false;
+            $("#img").removeClass("animate-spin")
+            $("#img").hide()
+            imgElement.src = response;
+            $("#prompt").val("");
+        }
+    });
+});
+
+function collect() {
+    var txtElement = document.getElementById("output");
+    var imgElement = document.getElementById("generateImg");
+    $.ajax({
+        url: '/collect',
+        type: 'POST',
+        data: $(this).serialize(),
+        success: function (response) {
+            if (response.web != undefined) {
+                window.location.href = response.web;
+            } else if (response.img != undefined) {
+                imgElement.src = response.img
+            } else {
+                txtElement.innerHTML += response.txt;
+            }
+        }
+    });
+}
 </script>
 </body>
 </html>

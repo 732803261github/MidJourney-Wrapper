@@ -1,253 +1,136 @@
 <!DOCTYPE html>
 <html>
-<head><title>MidJourney</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style> /* 全局样式 */
-    body {
-        background-color: #EEEFFF;
-        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        color: #333333;
-    }
-
-    /* 顶部标题样式 */
-    h1 {
-        color: #333;
-        text-align: center;
-        font-size: 3.2rem;
-        margin-top: 4.8rem;
-        margin-bottom: 2.4rem;
-        letter-spacing: 1px;
-        font-weight: lighter;
-        text-rendering: optimizeLegibility;
-    }
-
-    /* 代码展示区样式 */
-    .code {
-        max-width: 800px;
-        margin: 0 auto;
-        background-color: #FFFFFF;
-        border-radius: 10px;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1), 0 6px 6px rgba(0, 0, 0, 0.1);
-        margin-bottom: 2.4rem;
-        font-size: 1.8rem;
-        line-height: 2.8rem;
-        white-space: pre-wrap;
-        word-wrap: break-word;
-        overflow: auto;
-    }
-
-    /* 输入框样式 */
-    form {
-        max-width: 800px;
-        margin: 0 auto;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: relative;
-    }
-
-    input[type="text"] {
-        font-size: 1.8rem;
-        padding: 1.5rem 2rem;
-        border-radius: 10px;
-        background-color: #F9F9FA;
-        border: none;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.08), 0 2px 2px rgba(0, 0, 0, 0.08);
-        color: #444444;
-        flex-grow: 1;
-        outline: none !important;
-    }
-
-    /* 按钮样式 */
-    button[type="submit"] {
-        font-size: 1.8rem;
-        padding: 1.5rem 2rem;
-        border-radius: 10px;
-        background-color: #007AFF;
-        border: none;
-        color: #FFFFFF;
-        cursor: pointer;
-        transition: all .2s ease-in-out;
-        outline: none !important;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1);
-    }
-
-    button[type="submit"]:hover {
-        background-color: #0065D2;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15), 0 2px 2px rgba(0, 0, 0, 0.15);
-    }
-
-    /* 输入框中的字母样式 */
-    ::placeholder {
-        color: #999999;
-        font-weight: normal;
-        font-style: italic;
-    }
-
-    /* 底部提示样式 */
-    p {
-        margin-top: 1.5rem;
-        text-align: center;
-        font-size: 1.6rem;
-        color: #999999;
-    }
-
-    p span {
-        display: inline-block;
-        font-size: 1.8rem;
-        font-weight: bold;
-        color: #007AFF;
-        letter-spacing: 2px;
-    }
-
-    #loading {
-        display: flex;
-        justify-content: center;
-        align-items: center; /* 让子元素居中 */
-    }
-
-    .animate-spin {
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        animation: spin 1s infinite linear;
-    }
-
-    @keyframes spin {
-        from {
-            transform: rotate(0deg);
+<head>
+    <meta charset="UTF-8">
+    <title>Midjourney</title>
+    <!-- 引入Element UI的CSS文件 -->
+    <link rel="stylesheet" href="https://unpkg.com/element-ui@2.15.13/lib/theme-chalk/index.css">
+    <style>
+        body {
+            background-color: #fff;
         }
-        to {
-            transform: rotate(360deg);
+
+        .fixed-bottom {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 10px;
         }
-    }
 
-    button {
-        font-family: -apple-system, "Helvetica Neue", sans-serif;
-        font-size: 14px;
-        font-weight: 400;
-        padding: 8px 16px;
-        border-radius: 8px;
-        border: none;
-        background-color: #007aff;
-        color: #fff;
-        text-align: center;
-        text-decoration: none;
-        text-transform: capitalize;
-        cursor: pointer;
-        transition: all 0.2s ease-in-out;
-    }
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 60%;
+            margin: 0 auto;
+            height: 300px;
+        }
 
-    button:hover {
-        background-color: #006fe6;
-    }
+        .image-container img {
+            max-width: 100%;
+            max-height: 100%;
+        }
 
-    button:active {
-        background-color: #0058be;
-    }
+        .inline-input-group > * {
+            margin-right: 10px;
+        }
 
-    /* 移动端优化 */
-    @media screen and (max-width: 768px) {
         h1 {
-            font-size: 2.4rem;
-            margin-top: 2.4rem;
-            margin-bottom: 1.2rem;
+            text-align: center;
+            -webkit-text-align: center; /* Safari 和 Chrome */
+            -moz-text-align: center; /* Firefox */
+            -ms-text-align: center; /* IE */
+            font-size: 5.375vw; /* 5.375% of the viewport width */
         }
 
-        .code {
-            font-size: 1.4rem;
-            line-height: 2.2rem;
-        }
-
-        input[type="text"] {
-            font-size: 1.4rem;
-            padding: 1rem 1.5rem;
-        }
-
-        button[type="submit"] {
-            font-size: 1.4rem;
-            padding: 1rem 1.5rem;
-        }
-
-        p {
-            font-size: 1.4rem;
-        }
-
-        p span {
-            font-size: 1.6rem;
-        }
-    }
-
-    #collect_div {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 20vh;
-        font-size: 40px;
-        /* width: 100%; */
-        text-align: center;
-    }
-
-    #collect {
-        height: 15vh;
-        font-size: 6vh;
-    }
     </style>
 </head>
-<body><h1>MidJourney</h1>
-<div class="code" id="code"><img src="" id="generateImg" style="max-width: 98%;max-height: 98%"></div>
-<div>
-    <div class="code" id="output"></div>
-    <div id="loading"><img class="h-[40px] w-[40px]" id="img" src="../static/loading.png" hidden="true"></div>
-    <form><input name="prompt" type="text" placeholder="请输入图片描述" id="prompt"/>
-        <button type="submit">发送</button>
-    </form>
-    <p><span></span></p>
+<body>
+<div id="app">
+    <h1>Midjourney</h1>
+    <div class="image-container" v-show="imageUrl !==''">
+        <img :src="imageUrl" alt="Image">
+    </div>
+    <div class="fixed-bottom">
+        <el-form :model="form" ref="form" :rules="rules" label-width="80px">
+            <el-form-item label="" prop="prompt">
+                <div style="display: flex; flex-direction: row; align-items: center;" class="inline-input-group">
+                    <el-input v-model="form.prompt" placeholder="输入图片描述" style="width: 60%;"></el-input>
+                    <el-button type="primary" @click="submitForm('form')">提交任务</el-button>
+                    <el-button type="primary" @click="collectImage()">获取图片</el-button>
+                </div>
+            </el-form-item>
+        </el-form>
+    </div>
 </div>
-<div id="collect_div">
-    <button id="collect" onclick="collect()">5分钟后获取图片结果</button>
-</div>
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script> $('form').submit(function (event) {
-    var input = document.getElementById("prompt");
-    input.readOnly = true;
-    $("#img").show()
-    $("#img").addClass("animate-spin")
-    event.preventDefault();
-    $.ajax({
-        url: '/midjourney', type: 'POST', data: $(this).serialize(), success: function (response) {
-            var input = document.getElementById("prompt");
-            input.readOnly = false;
-            $("#img").removeClass("animate-spin")
-            $("#img").hide()
-            imgElement.src = response;
-            $("#prompt").val("");
+</body>
+<!-- 引入Vue和Element UI的JS文件 -->
+<script src="https://unpkg.com/vue@2.7.14/dist/vue.js"></script>
+<script src="https://unpkg.com/element-ui/lib/index.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                form: {
+                    prompt: '',
+                },
+                rules: {
+                    prompt: [{required: true, message: '请输入描述', trigger: 'blur'}],
+                },
+                imageUrl: ''
+            };
+        },
+        methods: {
+            submitForm(formName) {
+                this.$refs[formName].validate((valid) => {
+                    if (valid) {
+                        // 使用Ajax与后端交互
+                        axios.post('/midjourney', this.form).then(response => {
+                            console.log(response);
+                            this.$message({
+                                message: '任务提交成功',
+                                type: 'success'
+                            });
+                        }).catch(error => {
+                            this.$message({
+                                message: '状态错误',
+                                type: 'error'
+                            });
+                            console.log(error);
+                        });
+                    } else {
+                        console.log('error submit!!');
+                        return false;
+                    }
+                });
+            },
+            collectImage() {
+                // 使用Ajax与后端交互
+                var that = this
+                axios.post('/collect', this.form).then(response => {
+                    if (response.web != undefined) {
+                        window.location.href = response.web;
+                    } else if (response.img != undefined) {
+                        that.imageUrl = response.img
+                    } else {
+                        this.$message({
+                            message: response.txt,
+                            type: 'error'
+                        });
+                    }
+                }).catch(error => {
+                    this.$message({
+                        message: '状态错误',
+                        type: 'error'
+                    });
+                    console.log(error);
+                });
+            },
         }
     });
-});
-
-function collect() {
-    var txtElement = document.getElementById("output");
-    var imgElement = document.getElementById("generateImg");
-    $.ajax({
-        url: '/collect',
-        type: 'POST',
-        data: $(this).serialize(),
-        success: function (response) {
-            if (response.web != undefined) {
-                window.location.href = response.web;
-            } else if (response.img != undefined) {
-                imgElement.src = response.img
-            } else {
-                txtElement.innerHTML += response.txt;
-            }
-        }
-    });
-}
 </script>
 </body>
 </html>
