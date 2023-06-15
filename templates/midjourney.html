@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://unpkg.com/element-ui@2.15.13/lib/theme-chalk/index.css">
     <style>
         body {
-            background-color: #fff;
+            background-color: #2D2D2D;
         }
 
         .fixed-bottom {
@@ -37,11 +37,12 @@
         }
 
         h1 {
+            color: #EEEFFF;
             text-align: center;
             -webkit-text-align: center; /* Safari 和 Chrome */
             -moz-text-align: center; /* Firefox */
             -ms-text-align: center; /* IE */
-            font-size: 5.375vw; /* 5.375% of the viewport width */
+            font-size: 7.375vw; /* 5.375% of the viewport width */
         }
 
     </style>
@@ -54,10 +55,10 @@
     </div>
     <div class="fixed-bottom">
         <el-form :model="form" ref="form" :rules="rules" label-width="80px">
-            <el-form-item label="" prop="prompt">
-                <div style="display: flex; flex-direction: row; align-items: center;" class="inline-input-group">
-                    <el-input v-model="form.prompt" placeholder="输入图片描述" style="width: 60%;"></el-input>
-                    <el-button type="primary" @click="submitForm('form')">提交任务</el-button>
+            <el-form-item label="" prop="prompt" append>
+                <div style="display: flex; justify-content: center; align-items: center;">
+                    <el-input v-model="form.prompt" placeholder="输入图片描述" style="width: 60%; margin-right: 10px;"></el-input>
+                    <el-button type="primary" @click="submitForm('form')" style="margin-right: 10px;">提交任务</el-button>
                     <el-button type="primary" @click="collectImage()">获取图片</el-button>
                 </div>
             </el-form-item>
@@ -80,16 +81,17 @@
                 rules: {
                     prompt: [{required: true, message: '请输入描述', trigger: 'blur'}],
                 },
-                imageUrl: ''
+                imageUrl: '',
             };
+        },
+        mounted() {
         },
         methods: {
             submitForm(formName) {
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         // 使用Ajax与后端交互
-                        axios.post('/midjourney', this.form).then(response => {
-                            console.log(response);
+                        axios.post('/', this.form).then(response => {
                             this.$message({
                                 message: '任务提交成功',
                                 type: 'success'
@@ -102,19 +104,17 @@
                             console.log(error);
                         });
                     } else {
-                        console.log('error submit!!');
                         return false;
                     }
                 });
             },
             collectImage() {
                 // 使用Ajax与后端交互
-                var that = this
                 axios.post('/collect', this.form).then(response => {
-                    if (response.web != undefined) {
+                    if (response.data.web != undefined) {
                         window.location.href = response.web;
-                    } else if (response.img != undefined) {
-                        that.imageUrl = response.img
+                    } else if (response.data.img != undefined) {
+                        this.imageUrl = response.img
                     } else {
                         this.$message({
                             message: response.txt,
