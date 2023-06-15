@@ -199,6 +199,7 @@
     </style>
 </head>
 <body><h1>MidJourney</h1>
+<div class="code" id="code"><img src="" id="generateImg" style="max-width: 98%;max-height: 98%"></div>
 <div>
     <div class="code" id="output"></div>
     <div id="loading"><img class="h-[40px] w-[40px]" id="img" src="../static/loading.png" hidden="true"></div>
@@ -231,13 +232,16 @@
 
 function collect() {
     var txtElement = document.getElementById("output");
+    var imgElement = document.getElementById("generateImg");
     $.ajax({
         url: '/collect',
         type: 'POST',
         data: $(this).serialize(),
         success: function (response) {
-            if (response.txt == undefined) {
-                window.location.href = response.img;
+            if (response.web != undefined) {
+                window.location.href = response.web;
+            } else if (response.img != undefined) {
+                imgElement.src = response.img
             } else {
                 txtElement.innerHTML += response.txt;
             }
