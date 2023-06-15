@@ -58,7 +58,7 @@
             <el-form-item label="" prop="prompt" append>
                 <div style="display: flex; justify-content: center; align-items: center;">
                     <el-input v-model="form.prompt" placeholder="输入图片描述"
-                              style="width: 60%; margin-right: 10px;"></el-input>
+                              style="width: 60%; margin-right: 10px;" @keyup.enter="submitForm('form')"></el-input>
                     <el-button type="primary" @click="submitForm('form')" style="margin-right: 10px;">提交任务
                     </el-button>
                     <el-button type="primary" @click="collectImage()">获取图片</el-button>
@@ -113,7 +113,6 @@
             collectImage() {
                 // 使用Ajax与后端交互
                 axios.post('/collect', this.form).then(response => {
-                    debugger
                     if (response.data.web != undefined) {
                         window.location.href = response.web;
                     } else if (response.data.img != undefined) {
