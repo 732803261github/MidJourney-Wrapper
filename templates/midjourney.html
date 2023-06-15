@@ -119,8 +119,8 @@
                         this.imageUrl = response.data.img
                     } else {
                         this.$message({
-                            message: response.txt,
-                            type: 'error'
+                            message: '请稍后重试',
+                            type: 'warning'
                         });
                     }
                 }).catch(error => {
