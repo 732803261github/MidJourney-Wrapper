@@ -57,8 +57,10 @@
         <el-form :model="form" ref="form" :rules="rules" label-width="80px">
             <el-form-item label="" prop="prompt" append>
                 <div style="display: flex; justify-content: center; align-items: center;">
-                    <el-input v-model="form.prompt" placeholder="输入图片描述" style="width: 60%; margin-right: 10px;"></el-input>
-                    <el-button type="primary" @click="submitForm('form')" style="margin-right: 10px;">提交任务</el-button>
+                    <el-input v-model="form.prompt" placeholder="输入图片描述"
+                              style="width: 60%; margin-right: 10px;"></el-input>
+                    <el-button type="primary" @click="submitForm('form')" style="margin-right: 10px;">提交任务
+                    </el-button>
                     <el-button type="primary" @click="collectImage()">获取图片</el-button>
                 </div>
             </el-form-item>
