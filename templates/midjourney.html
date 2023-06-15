@@ -111,10 +111,11 @@
             collectImage() {
                 // 使用Ajax与后端交互
                 axios.post('/collect', this.form).then(response => {
+                    debugger
                     if (response.data.web != undefined) {
                         window.location.href = response.web;
                     } else if (response.data.img != undefined) {
-                        this.imageUrl = response.img
+                        this.imageUrl = response.data.img
                     } else {
                         this.$message({
                             message: response.txt,
