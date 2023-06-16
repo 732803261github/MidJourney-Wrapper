@@ -45,7 +45,7 @@ bot = commands.Bot(command_prefix='/')
 #     return render_template('image.html')
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/gen', methods=['GET', 'POST'])
 def midjourney():
     if request.method == 'POST':
         prompt = request.json['prompt']
