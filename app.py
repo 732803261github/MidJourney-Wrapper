@@ -59,7 +59,7 @@ def midjourney():
         headers = {
             'authorization': Globals.SALAI_TOKEN
         }
-        payload = {
+        payload_old = {
             "type": 2,
             "application_id": "936929561302675456",
             "guild_id": "1116666992238276620",
@@ -98,6 +98,51 @@ def midjourney():
                         "value": prompt
                     }
                 ],
+                "attachments": []
+            },
+        },
+        payload = {
+            "type": 2,
+            "application_id": "936929561302675456",
+            "guild_id": "1116666992238276620",
+            "channel_id": "1116666992993259573",
+            "session_id": "43aefd0f3d8bb03ec48f36de367c4fa7",
+            "data": {
+                "version": "1118961510123847772",
+                "id": "938956540159881230",
+                "name": "imagine",
+                "type": 1,
+                "options": [
+                    {
+                        "type": 3,
+                        "name": "prompt",
+                        "value": "line"
+                    }
+                ],
+                # "application_command": {
+                #     "id": "938956540159881230",
+                #     "application_id": "936929561302675456",
+                #     "version": "1118961510123847772",
+                #     "default_member_permissions": null,
+                #     "type": 1,
+                #     "nsfw": false,
+                #     "name": "imagine",
+                #     "description": "Create images with Midjourney",
+                #     "dm_permission": true,
+                #     "contexts": [
+                #         0,
+                #         1,
+                #         2
+                #     ],
+                #     "options": [
+                #         {
+                #             "type": 3,
+                #             "name": "prompt",
+                #             "description": "The prompt to imagine",
+                #             "required": true
+                #         }
+                #     ]
+                # },
                 "attachments": []
             },
         }
