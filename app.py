@@ -47,7 +47,7 @@ bot = commands.Bot(command_prefix='/')
 
 @app.route('/', methods=['GET', 'POST'])
 def midjourney():
-    if 1==1:
+    if request.method == 'POST' or request.method == 'GET':
         prompt = request.json['prompt']
         completion = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
