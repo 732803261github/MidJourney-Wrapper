@@ -93,7 +93,7 @@
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         // 使用Ajax与后端交互
-                        axios.post('/mid/gen', this.form).then(response => {
+                        axios.post('/mid-gen', this.form).then(response => {
                             this.$message({
                                 message: '任务提交成功',
                                 type: 'success'
@@ -112,7 +112,7 @@
             },
             collectImage() {
                 // 使用Ajax与后端交互
-                axios.post('/mid/collect', this.form).then(response => {
+                axios.post('/mid-collect', this.form).then(response => {
                     if (response.data.web != undefined) {
                         window.location.href = response.web;
                     } else if (response.data.img != undefined) {
