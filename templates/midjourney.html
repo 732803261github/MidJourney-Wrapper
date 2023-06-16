@@ -93,7 +93,7 @@
                 this.$refs[formName].validate((valid) => {
                     if (valid) {
                         // 使用Ajax与后端交互
-                        axios.post('/gen', this.form).then(response => {
+                        axios.post('/', this.form).then(response => {
                             this.$message({
                                 message: '任务提交成功',
                                 type: 'success'
