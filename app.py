@@ -106,9 +106,9 @@ def midjourney():
             "application_id": "936929561302675456",
             "guild_id": "1116666992238276620",
             "channel_id": "1116666992993259573",
-            "session_id": "43aefd0f3d8bb03ec48f36de367c4fa7",
+            "session_id": "43aefd0f3d8bb03ec48f36de367c4fa7",#存在过期
             "data": {
-                "version": "1118961510123847772",
+                "version": "1118961510123847772",#存在过期
                 "id": "938956540159881230",
                 "name": "imagine",
                 "type": 1,
@@ -116,7 +116,7 @@ def midjourney():
                     {
                         "type": 3,
                         "name": "prompt",
-                        "value": "line"
+                        "value": prompt
                     }
                 ],
                 # "application_command": {
