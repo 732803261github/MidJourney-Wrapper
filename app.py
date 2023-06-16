@@ -28,7 +28,7 @@ bot = commands.Bot(command_prefix='/')
 #         )
 #         return jsonify(completion.choices[0].message)
 #
-#     return render_template('index.html')
+#     return render_template('chat.html')
 #
 #
 # @app.route('/image', methods=['GET', 'POST'])
@@ -45,7 +45,7 @@ bot = commands.Bot(command_prefix='/')
 #     return render_template('image.html')
 
 
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/gen', methods=['GET', 'POST'])
 def midjourney():
     if request.method == 'POST':
         prompt = request.json['prompt']
@@ -108,7 +108,7 @@ def midjourney():
         # 打印响应状态码和响应内容
         return response.content
 
-    return render_template('midjourney.html')
+    return render_template('index.html')
 
 
 @app.route('/midjson', methods=['GET', 'POST'])
