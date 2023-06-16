@@ -45,7 +45,7 @@ bot = commands.Bot(command_prefix='/')
 #     return render_template('image.html')
 
 
-@app.route('/mid-gen', methods=['GET', 'POST'])
+@app.route('/mid/gen', methods=['GET', 'POST'])
 def midjourney():
     if request.method == 'POST':
         prompt = request.json['prompt']
@@ -111,7 +111,7 @@ def midjourney():
     return render_template('index.html')
 
 
-@app.route('/mid-json', methods=['GET', 'POST'])
+@app.route('/mid/json', methods=['GET', 'POST'])
 def retrieve_messages():
     headers = {'authorization': Globals.SALAI_TOKEN}
     r = requests.get(f'https://discord.com/api/v10/channels/1116666992993259573/messages?limit={10}', headers=headers)
@@ -123,7 +123,7 @@ def retrieve_messages():
     # return arr
 
 
-@app.route('/mid-collect', methods=['GET', 'POST'])
+@app.route('/mid/collect', methods=['GET', 'POST'])
 def collecting_results():
     type = 'txt'
     message_list = retrieve_messages()
