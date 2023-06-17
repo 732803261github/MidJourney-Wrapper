@@ -99,10 +99,10 @@
         },
         computed: {
             imageUrl() {
-                return encodeURIComponent(this.remoteUrl);
+                return this.remoteUrl;
             },
             proxyUrl() {
-                return "http://localhost/img?url=";
+                return "http://43.130.230.251/img?url=";
             }
         },
         methods: {
