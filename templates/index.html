@@ -60,7 +60,7 @@
 <div id="app">
     <h1>Midjourney</h1>
     <div class="image-container" v-show="imageUrl !==''">
-        <img :src="proxyUrl + imageUrl" alt="Image">
+        <img :src="proxyUrl + imageUrl" alt="Image" v-if="imageUrl !==''">
     </div>
     <div class="fixed-bottom">
         <el-form :model="form" ref="form" :rules="rules" label-width="80px" @submit.native.prevent>
