@@ -123,7 +123,8 @@
                 // 使用Ajax与后端交互
                 axios.post('/mid/collect', this.form).then(response => {
                     if (response.data.img != undefined) {
-                        this.imageUrl += '/mid/'+response.data.img
+                        this.imageUrl = ''
+                        this.imageUrl += '/midimg/?url='+ response.data.img
                     } else {
                         this.$message({
                             message: '图片生成中，请稍后重试',
