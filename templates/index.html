@@ -45,6 +45,15 @@
             font-size: 7.375vw; /* 5.375% of the viewport width */
         }
 
+        .el-form-item__content{
+            justify-content: center;
+            display: flex;
+        }
+
+        .el-form-item__error {
+            display: contents;
+        }
+
     </style>
 </head>
 <body>
@@ -55,15 +64,15 @@
     </div>
     <div class="fixed-bottom">
         <el-form :model="form" ref="form" :rules="rules" label-width="80px" @submit.native.prevent>
-            <el-form-item label="" prop="prompt">
-                <div style="display: flex; justify-content: center; align-items: center;">
+            <div style="display: inline; justify-content: center; align-items: center;">
+                <el-form-item label="" prop="prompt">
                     <el-input v-model="form.prompt" placeholder="输入图片描述" @keyup.enter.native="submitForm('form')"
-                              style="width: 60%; margin-right: 10px;" ></el-input>
+                              style="width: 60%; margin-right: 10px;"></el-input>
                     <el-button type="primary" @click="submitForm('form')" style="margin-right: 10px;">提交任务
                     </el-button>
                     <el-button type="primary" @click="collectImage()">获取图片</el-button>
-                </div>
-            </el-form-item>
+                </el-form-item>
+            </div>
         </el-form>
     </div>
 </div>
