@@ -22,7 +22,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            width: 60%;
+            width: 80%;
             margin: 0 auto;
             height: 76vw;
         }
@@ -54,11 +54,11 @@
         <img :src="imageUrl" alt="Image">
     </div>
     <div class="fixed-bottom">
-        <el-form :model="form" ref="form" :rules="rules" label-width="80px">
-            <el-form-item label="" prop="prompt" append>
+        <el-form :model="form" ref="form" :rules="rules" label-width="80px" @submit.native.prevent>
+            <el-form-item label="" prop="prompt">
                 <div style="display: flex; justify-content: center; align-items: center;">
-                    <el-input v-model="form.prompt" placeholder="输入图片描述"
-                              style="width: 60%; margin-right: 10px;" @keyup.enter="submitForm('form')"></el-input>
+                    <el-input v-model="form.prompt" placeholder="输入图片描述" @keyup.enter.native="submitForm('form')"
+                              style="width: 60%; margin-right: 10px;" ></el-input>
                     <el-button type="primary" @click="submitForm('form')" style="margin-right: 10px;">提交任务
                     </el-button>
                     <el-button type="primary" @click="collectImage()">获取图片</el-button>
@@ -113,13 +113,11 @@
             collectImage() {
                 // 使用Ajax与后端交互
                 axios.post('/mid/collect', this.form).then(response => {
-                    if (response.data.web != undefined) {
-                        window.location.href = response.web;
-                    } else if (response.data.img != undefined) {
+                    if (response.data.img != undefined) {
                         this.imageUrl = response.data.img
                     } else {
                         this.$message({
-                            message: '请稍后重试',
+                            message: '图片生成中，请稍后重试',
                             type: 'warning'
                         });
                     }
