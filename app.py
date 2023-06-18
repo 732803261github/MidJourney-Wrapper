@@ -59,36 +59,14 @@ def midjourney():
         headers = {
             'authorization': Globals.SALAI_TOKEN
         }
-        payload_old = {
+        payload = {
             "type": 2,
-            "application_id": "936929561302675456",
-            "guild_id": "1116666992238276620",
-            "channel_id": "1116666992993259573",
-            "session_id": "8fd1e6029a5d0604113dae462e6b9f57",
+            "application_id": "1116288017972334643",
+            "channel_id": "1116291232843448390",
+            "session_id": "c646c91d0f776cc625a82a2bb67ffd59",
             "data": {
-                "version": "1077969938624553050",
-                "id": "938956540159881230",
-                "name": 'imagine',
-                "type": 1,
-                "options": [
-                    {
-                        "type": 3,
-                        "name": "prompt",
-                        "value": prompt
-                    }
-                ],
-                "attachments": []
-            },
-        }
-        payload2 = {
-            "type": 2,
-            "application_id": "1116670202210435092",
-            "guild_id": "1116666992238276620",
-            "channel_id": "1116666992993259573",
-            "session_id": "8fd1e6029a5d0604113dae462e6b9f57",
-            "data": {
-                "version": "1116938194840191064",
-                "id": "1116938194840191058",
+                "version": "1116926817966751812",
+                "id": "1116926817966751806",
                 "name": "mj_imagine",
                 "type": 1,
                 "options": [
@@ -98,51 +76,6 @@ def midjourney():
                         "value": prompt
                     }
                 ],
-                "attachments": []
-            },
-        },
-        payload = {
-            "type": 2,
-            "application_id": "936929561302675456",
-            "guild_id": "1116666992238276620",
-            "channel_id": "1116666992993259573",
-            "session_id": "43aefd0f3d8bb03ec48f36de367c4fa7",#存在过期
-            "data": {
-                "version": "1118961510123847772",#存在过期
-                "id": "938956540159881230",
-                "name": "imagine",
-                "type": 1,
-                "options": [
-                    {
-                        "type": 3,
-                        "name": "prompt",
-                        "value": prompt
-                    }
-                ],
-                # "application_command": {
-                #     "id": "938956540159881230",
-                #     "application_id": "936929561302675456",
-                #     "version": "1118961510123847772",
-                #     "default_member_permissions": null,
-                #     "type": 1,
-                #     "nsfw": false,
-                #     "name": "imagine",
-                #     "description": "Create images with Midjourney",
-                #     "dm_permission": true,
-                #     "contexts": [
-                #         0,
-                #         1,
-                #         2
-                #     ],
-                #     "options": [
-                #         {
-                #             "type": 3,
-                #             "name": "prompt",
-                #             "description": "The prompt to imagine",
-                #             "required": true
-                #         }
-                #     ]
-                # },
                 "attachments": []
             },
         }
