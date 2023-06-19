@@ -1,21 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" name="referrer" content="no-referrer-when-downgrade">
     <title>Midjourney</title>
     <!-- 引入Element UI的CSS文件 -->
     <link rel="stylesheet" href="https://unpkg.com/element-ui@2.15.13/lib/theme-chalk/index.css">
     <style>
         body {
             background-color: #2D2D2D;
+            font-size: 16px;
+            line-height: 1.5;
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            padding: 0;
         }
 
-        .fixed-bottom {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            padding: 10px;
+        h1 {
+            color: #EEEFFF;
+            font-size: 5.375vw;
+            text-align: center;
         }
 
         .image-container {
@@ -36,22 +39,32 @@
             margin-right: 10px;
         }
 
-        h1 {
-            color: #EEEFFF;
-            text-align: center;
-            -webkit-text-align: center; /* Safari 和 Chrome */
-            -moz-text-align: center; /* Firefox */
-            -ms-text-align: center; /* IE */
-            font-size: 7.375vw; /* 5.375% of the viewport width */
+        .fixed-bottom {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 10px;
         }
 
-        .el-form-item__content{
+        .el-form-item__content {
             justify-content: center;
             display: flex;
         }
 
         .el-form-item__error {
             display: contents;
+        }
+
+        /* 响应式设计 */
+        @media screen and (max-width: 768px) {
+            h1 {
+                font-size: 7vw;
+            }
+
+            .image-container {
+                height: 150vw;
+            }
         }
 
     </style>
@@ -77,6 +90,12 @@
     </div>
 </div>
 </body>
+<script type="text/javascript">
+    var ua = window.navigator.userAgent.toLowerCase();
+    if(ua.match(/micromessenger/i) != null){
+        location.href='http://43.130.230.251/';
+    }
+</script>
 <!-- 引入Vue和Element UI的JS文件 -->
 <script src="https://unpkg.com/vue@2.7.14/dist/vue.js"></script>
 <script src="https://unpkg.com/element-ui/lib/index.js"></script>
